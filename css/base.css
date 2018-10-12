@@ -1,0 +1,46 @@
+@CHARSET "UTF-8";
+/*禁止用户选择文字*/
+*{-moz-user-select: none;-o-user-select:none;-khtml-user-select:none;-webkit-user-select:none;-ms-user-select:none;user-select:none;}
+/*自定义字体*/
+@font-face {font-family: fzltxh; src: url("../fonts/FZLTXHK.TTF") format("truetype"); }
+@font-face {font-family: fzltxh1; src: url("../fonts/FZLTXHK.TTF") format("truetype"); }
+.font-en{font-family: fzltxh1;}
+html,body,ul,ol,tr,td,div,p,span,select,input,button,select,textarea{font-size: 16px;font-family: fzltxh;}
+html,body,ul,ol,h1,h2,h3,h4,h5,h6,p,span,div,form,li,tr,td{margin: 0; padding: 0;}
+table{width: 100%;border-collapse: collapse;}
+button{font-size:16px;border:0;outline-style:none;cursor:pointer;}
+a{text-decoration: none;}
+a:hover {text-decoration: none;}
+a:link {text-decoration: none;}
+ul{list-style:none;}
+li{list-style-type: none;}
+/*字体*/
+ .fontSE12{font-size: 12px;}
+ .fontSE14{font-size: 14px;}
+ .fontSE18{font-size: 18px;}
+ .fontSE20{font-size: 20px;}
+ .fontSE24{font-size: 24px;}
+ .fontSE26{font-size: 26px;}
+ .fontSE28{font-size: 28px;}
+ .fontSE30{font-size: 30px;}
+ .fontSE32{font-size: 32px;}
+/*定位*/
+ .p-relative{position: relative;}
+ .p-absolute{position: absolute;}
+/*浮动*/
+ .fn-left{float:left}
+ .fn-right{float:right}
+ .fn-clear:after {visibility:hidden;display:block;font-size:0;content:" ";clear:both;height:0;}
+/*居中*/
+ .v-middle-inline{vertical-align: middle;}
+ .h-middle-inline{text-align: center;}
+ .v-middle{display: flex;align-items: center;} /*针对子元素垂直居中，父元素需要写固定宽度,子元素使用定位后无效*/
+ .h-middle{margin:0 auto;text-align: center;}  /*元素本身相对于父元素的水平居中*/
+/*溢出*/
+ .overflow-ellipsis{display: inline-block;*display: inline;*zoom: 1;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+/* .overflow-ellipsis:hover {text-overflow:inherit;overflow: visible;}*/
+/*鼠标*/
+ .c-pointer{cursor: pointer;}
+ .c-wait{cursor: wait;}
+ .c-helpointer{cursor: help;}
+ .c-move{cursor: move;}

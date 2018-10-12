@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>表单插件</title>
+	</head>
+	<style>
+		@font-face {
+			font-family: fzltxh;
+			src: url("../fonts/FZLTXHK.TTF") format("truetype");
+		}		
+		textarea {
+			font-family: "fzltxh";
+		}
+		::-webkit-scrollbar {
+			width: 15px;
+			height: 4px;
+			background-color: #343434;
+		}
+		/*定义滚动条轨道 内阴影+圆角*/
+		
+		 ::-webkit-scrollbar-track {
+			-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+			background: #343434;
+		}
+		/*定义滑块 内阴影+圆*/	
+		 ::-webkit-scrollbar-thumb {
+			border-radius: 3px;
+			-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+			background-color: rgba(255, 255, 255, 0.1);
+		}
+		
+		 ::-webkit-scrollbar-thumb:hover {
+			border-radius: 3px;
+			-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+			background-color: rgba(255, 255, 255, 0.2);
+		}
+		
+		body {
+			background-color: #eeeeee;
+			padding: 0;
+			margin: 0;
+			font-family: "黑体";
+		}
+		
+		.custom_all input[type="text"],
+		.custom_all input[type="password"] {
+			width: 220px;
+			height: 30px;
+			margin: 5px;
+			border-radius: 10px;
+			border: 1px solid gainsboro;
+			padding-left: 10px;
+			outline: none;
+			box-shadow: inset 0 2px 5px #eee;
+		}
+		
+		.custom_all textarea {
+			border-radius: 10px;
+			border: 1px solid gainsboro;
+			outline: none;
+		}
+		
+		.custom_all .form_e {
+			text-align: right;
+			width: 25%;
+			box-sizing: border-box;
+			font-family: "黑体";
+			font-size: 16px;
+			margin-right: 20px;
+			display: inline-block;
+			float: left;
+			position: relative;
+			margin-top: 0;
+			margin-bottom: 0;
+		}
+		
+		.custom_all h2 {
+			color: #b2b0a9;
+			font-size: 50px;
+			padding-left: 60px;
+			box-sizing: border-box;
+			margin-top: 0px;
+		}
+		
+		.custom_all {
+			border: 1px solid rgba(0, 0, 0, 0);
+			width: 100%;
+			margin-top: 100px;
+			box-sizing: border-box;
+			position: relative;
+			z-index: 199;
+		}
+		
+		.header {
+			width: 100%;
+			height: 60px;
+			position: fixed;
+			top: 0px;
+			background-color: black;
+			color: white;
+			border: 1px solid black;
+			z-index: 1000;
+		}
+		
+		.header h1 {
+			border: 1px solid black;
+			position: relative;
+			bottom: 6px;
+			padding-left: 90px;
+			font-size: 26px;
+			letter-spacing: 3px;
+			font-family: "微软雅黑";
+		}
+		
+		.footer {
+			width: 100%;
+			height: 40px;
+			background-color: darkgray;
+			border: 1px solid darkgray;
+			position: fixed;
+			bottom: 0px;
+			text-align: center;
+			z-index: 1000;
+		}
+		
+		.footer button {
+			border: 1px solid #3c6db0;
+			width: 65px;
+			height: 30px;
+			border-radius: 10px;
+			margin-right: 50px;
+			outline: none;
+			background-color: #3c6db0;
+			letter-spacing: 3px;
+			color: white;
+			margin-top: 7px;
+			line-height: 30px;
+			cursor: pointer;
+		}
+		
+		.custom_all .after {
+			position: absolute;
+			right: -30%;
+			border: 1px solid gainsboro;
+			background-color: rgba(20, 20, 10, 0.1);
+			border-radius: 10px;
+			font-size: 13px;
+			padding: 2px;
+		}
+		
+		.custom_all em {
+			position: absolute;
+			display: inline-block;
+			width: 20px;
+			height: 20px;
+			text-align: center;
+			box-sizing: border-box;
+			border-radius: 10px;
+			font-size: 12px;
+			margin-top: 8px;
+		}
+		
+		.custom_all font {
+			position: absolute;
+			line-height: 50px;
+			display: inline-block;
+			margin-left: 21px;
+			margin-top: -8px;
+		}
+		
+		.header h3 {
+			position: relative;
+			bottom: 45px;
+			padding-left: 320px;
+			font-weight: normal;
+		}
+		
+		.custom_all h2:hover {
+			color: #777777;
+		}	
+		.box-tips {
+			position: relative;
+			display: inline-block;
+			max-width: 400px;
+			padding: 4px 8px;
+			border-radius: 2px;
+			/*border-radius: 0px 8px 8px 8px;*/
+			background-color: rgba(216, 216, 216, 0.79);
+			line-height: 15px;
+			font-size: 13px;
+			z-index: 2000;
+		}
+		
+		.box-tips:before {
+			position: absolute;
+			right: 1px;
+			top: -18px;
+			content: '';
+			border-top: 8px solid transparent;
+			border-bottom: 8px solid transparent;
+			border-left: 12px solid transparent;
+			border-right: 12px solid rgba(216, 216, 216, 0.79);
+			transform: rotate(90deg);
+			z-index: 2000;
+		}
+	</style>
+	<body>
+		<div class="header">
+			<h1>自定义表单插件</h1>
+			<h3>Form &nbsp;Plugin</h3>
+		</div>
+		<div class="custom_all">
+			<h2>EASYFORM</h2>
+			<form id="form_define" action="sub.html" name="form_custom" method="get">
+				<p class="form_e">用户名：
+					<input type="text" autocomplete="on" name="username" id="user" data-transmit data-prove="*:notnull();*:length(4,18);cq:length(,16);xj:length(8);xz:length(10,30);gx:length(,5)" tips="用户名" />
+				</p>
+				<p class="form_e">密码：
+					<input type="password" required="required" autocomplete="on" name="password" data-transmit data-prove="*:notnull();*:length(4,18);cq:length(4,)" id="pass" tips="密码" />
+				</p>
+				<p class="form_e">确认密码：
+					<input type="password" required="required" autocomplete="on" name="password" data-transmit data-prove="*:notnull();*:compare(==_pass);" tips="确认密码" />
+
+				</p>
+				<p class="form_e">地 区：
+					<input type="text" required="required" autocomplete="on" name="area" data-prove="*:notnull()" tips="地区" />
+
+				</p>
+				<p class="form_e">邮箱：
+					<input type="text" required="required" autocomplete="on" name="email" data-transmit data-prove="*:notnull();*:email()" tips="邮箱" />
+
+				</p>
+				<p class="form_e">详细地址：
+					<input type="text" required="required" autocomplete="on" name="address" tips="详细地址" />
+
+				</p>
+				<p class="form_e">身份证：
+					<input type="text" required="required" autocomplete="on" name="id_number" data-transmit data-prove="*:notnull();*:id_card()" tips="身份证" />
+
+				</p>
+				<p class="form_e">电话号码：
+					<input type="text" required="required" autocomplete="on" name="phone_number" data-prove="*:tel_number()" tips="电话号码" />
+
+				</p>
+				<p class="form_e">邮编：
+					<input type="text" name="pos" data-prove="*:notnull();xj:pos();*:length(6)" tips="邮编">
+
+				</p>
+				<p class="form_e">整 数：
+					<input type="text" autocomplete="on" name="ints" data-prove="*:notnull();*:integer()" tips="整数" />
+
+				</p>
+				<p class="form_e">字 符：
+					<input type="text" autocomplete="on" name="chars" data-prove="*:character()" tips="字符" />
+
+				</p>
+				<p class="form_e">浮点数：
+					<input type="text" required="required" name="floats" autocomplete="on" data-prove="*:floats()" tips="浮点数" />
+
+				</p>
+				<p class="form_e">范围1：
+					<input type="text" required="required" autocomplete="on" name="range" data-prove="*:num_range(0.1,5.5);cq:num_range(10,41);*:length(1,3)" tips="数字范围应在" />
+				</p>
+				<p class="form_e">范围2：
+					<input type="text" required="required" autocomplete="on" name="range" data-prove="*:num_range(1,4);*:length(1);xj:num_range(20,50);" tips="数字范围应在" />
+				</p>
+				<p class="form_e">范围3：
+					<input type="text" required="required" autocomplete="on" name="range" data-prove="*:num_range(2,8);*:length(1)" tips="数字范围应在应在" />
+				</p>
+				<p class="form_e">关联A:
+					<input type="text" name="A" data-prove="*:relation(answer[length(5)],[length(2)]);cq:relation(answer[length(5)],[length(2,9)])" tips="关联不通过" />
+				</p>
+				<p class="form_e">关联B:
+					<input type="text" id="answer" name="asdfg" tips="关联不通过" />
+				</p>
+				<p class="form_e">大小比较C:
+					<input type="text" value=789 data-prove="*:compare(==_com)" tips="C应该" />
+
+				</p>
+				<p class="form_e">大小比较D:
+					<input type="text" name="com2" id="com" value=345 data-prove />
+
+				</p>
+				<p class="form_e">自定义规则1：
+					<input type="text" tips="格式不对" id="a" value=11 data-prove />
+
+				</p>
+				<p class="form_e">自定义规则2：
+					<input type="text" tips="格式不对" id="b" value=12 data-prove/>
+
+				</p>
+				<p class="form_e">自定义规则3：
+					<input type="text" tips="格式不对" id="c" value=13 data-prove/>
+				</p>
+				<p class="form_e" style="margin-bottom: 20px;">
+					<label for="s_n">男：</label>
+					<input type="radio" id="s_n" name="sex" value="男"   data-transmit  />
+					<label for="s_l">女：</label>
+					<input type="radio" id="s_l" name="sex" value="女" data-transmit />
+					<label for="s_o">其他：</label>
+					<input type="radio" id="s_o" name="sex" value="其他"  data-transmit  data-prove="*:notnull();" tips="性别"/>
+					<!--<input type="text"  data-prove="*:notnull()" tips="性别" hidden="hidden"  />-->
+				</p>
+				<p class="form_e" style="margin-bottom: 20px;" >
+					one
+					<input type="checkbox" value="one" name="fx"  /> two
+					<input type="checkbox" value="two" name="fx"  /> three
+					<input type="checkbox" value="three" name="fx"  data-prove="*:notnull();" tips="复选框"/>
+				    <!--<input type="text"  data-prove="*:notnull()" tips="复选框" hidden="hidden"  />-->
+				</p>
+				<p class="form_e" style="margin-bottom: 20px;">	
+					<select name="selects" name="fx" data-transmit data-prove="*:notnull();" tips="队列">
+						<option></option>
+						<option>第一组</option>
+						<option>第二组</option>
+						<option>第三组</option>
+						<option>第四队</option>
+						<option>第五队</option>
+						<option>第六队</option>
+					</select>
+				</p>
+				<p style="margin-bottom:40px;" class="form_e">
+					<textarea style="width:50%;height:120%;" required="required" name="textareas" data-transmit data-prove="*:notnull();cq:length(10,46)" tips="输入框"></textarea>
+
+				</p>
+
+		</div>
+		<div class="footer">
+			<button type="reset" value="重置" />重置</button>
+			<button type="button" id="saves">注册</button>
+			<button type="button" style="width:158px;letter-spacing:1px;">我有账号，我要登录</button>
+		</div>
+		</form>
+
+		<!--<p>&nbsp;&nbsp;&nbsp;用户名：
+			<input type="text" autocomplete="on" name="username" id="user" data-transmit data-prove="*:notnull();*:length(4,18);cq:length(4,16);xj:length(8);xz:length(10,30);gx:length(,5)" tips="用户名" />
+		</p>-->
+	</body>
+
+</html>
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="js/define_form.js"></script>
+<script src="js/rules_form.js"></script>
+<script src="js/show_tips.js"></script>
+<script src="js/test.js"></script>
+<script type="text/babel" src="js/babel-core/browser.min.js"></script>
+<script>
+
+</script>
